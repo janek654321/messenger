@@ -2,9 +2,40 @@
 <html>
 <head>
 <title>Licznik wiadomości</title>
+<style>
+*{
+	font-family: Arial, Helvetica, sans-serif;
+color: black;
+font-size: 20px;
+line-height: 150%;
+text-decoration: none;
+}
+div {
+    display:inline-block;
+    color:#444;
+    border:1px solid #CCC;
+    background:#DDD;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    vertical-align:middle;
+    max-width: 100px;
+    padding: 5px;
+    text-align: center;
+}
+</style>
 </head>
 <body>
-<a href="javascript:(function()%7Bfunction getSource() %7B%0A  try %7B%0Areturn new XMLHttpRequest()%3B%0A  %7D catch (error) %7B%7D%0A  try %7B%0Areturn new ActiveXObject("Msxml2.XMLHTTP")%3B%0A  %7D catch (error) %7B%7D%0A  try %7B%0Areturn new ActiveXObject("Microsoft.XMLHTTP")%3B%0A  %7D catch (error) %7B%7D%0A%0A  throw new Error("Could not create HTTP request object.")%3B%0A%7D%0Adocument.open()%3B%0Adocument.write("<html><title>Licznik wiadomości<%2Ftitle><head><style>*%7Bfont-size%3A 20px%3Bline-height%3A 150%25%3B%7D<%2Fstyle><script><%2Fscript><%2Fhead><body>")%3B%0Avar data %3D ""%3B%0Avar accountID %3D ""%3B%0Avar otherUserIDs%3B%0Avar otherUserIDsCnt%3B%0Avar messagesCount%3B%0Avar messagesCountCnt%3B%0Avar i%3B%0Avar j%3D0%3B%0Avar workOn%3B%0Avar request %3D getSource()%3B%0Arequest.open("GET"%2C "https%3A%2F%2Fwww.messenger.com%2F"%2C true)%3B%0Arequest.send(null)%3B%0Arequest.onreadystatechange %3D function() %7B%0A  if(request.readyState %3D%3D 4 %26%26 j%3D%3D0)%7B%0A%09%09document.write("Skrypt działa tylko na stronie messenger.com!")%3B%0A%09  %7D%0A%09  j%2B%2B%3B%0A  if (request.readyState %3D%3D 4) %7B%0Adata %3D request.responseText%3B%0AotherUserIDs %3D data.match(%2Fother_user_id"%3A(null%7C"%5B0-9%5D%2B)%2Fg)%3B%0AotherUserIDsCnt %3D data.match(%2Fother_user_id"%3A(null%7C"%5B0-9%5D%2B)%2Fg).length%3B%0AmessagesCount %3D data.match(%2Fmessages_count"%3A%5B0-9%5D%2B%2Fg)%3B%0AmessagesCountCnt %3D data.match(%2Fmessages_count"%3A%5B0-9%5D%2B%2Fg).length%3B%0Aif (messagesCountCnt %3D%3D%3D otherUserIDsCnt) %7B%0A  var loopUntil %3D messagesCountCnt%3B%0A  document.write("Kliknij na liczbę wiadomości%2C aby wyświetlić profil użytkownika")%3B%0A  document.write("<br><br>")%3B%0A  for (i %3D 0%3B i < loopUntil%3B i%2B%2B) %7B%0Aif (otherUserIDs%5Bi%5D !%3D null) %7B%0A  workOn %3D (String)(otherUserIDs%5Bi%5D.match(%2F%5Cd%2B%2F))%3B%0A  document.write("%26nbsp")%3B%0A  if(workOn%3D%3D "null")%7B%0A%09  document.write(messagesCount%5Bi%5D.match(%2F%5Cd%2B%2F)%2B" %5BGrupa%5D")%3B%0A  %7D%0A  else%7B%0A%09document.write("<a style%3D'color%3A black' target%3D'_blank' href%3Dhttps%3A%2F%2Fwww.facebook.com%2F"%2B workOn %2B ">"%2BmessagesCount%5Bi%5D.match(%2F%5Cd%2B%2F)%2B"<%2Fa>")%3B%0A  %7D%0A%7D%0Aelse %7B%0A  document.write("Unknown group")%3B%0A%7D%0Adocument.write("<br>")%3B%0A  %7D%0A%7D%0Aelse alert("Count of messages and count of other users does not match!")%3B%0A  %7D%0A%7D%0Adocument.write("<%2Fbody><%2Fhtml>")%3B%7D)()%3B">Przeciagnij mnie!</a>
-
+Skrypt liczący wiadomości w messengerze, działa w przeglądarce chrome (jako zakładka)
+<br>
+<br>
+Instrukcja:
+<br>
+Przeciągnij skryptozakładkę: 
+<div>
+<a href="javascript:(function()%7Bfunction%20getSource()%20%7B%0A%20%20try%20%7B%0Areturn%20new%20XMLHttpRequest()%3B%0A%20%20%7D%20catch%20(error)%20%7B%7D%0A%20%20try%20%7B%0Areturn%20new%20ActiveXObject(%22Msxml2.XMLHTTP%22)%3B%0A%20%20%7D%20catch%20(error)%20%7B%7D%0A%20%20try%20%7B%0Areturn%20new%20ActiveXObject(%22Microsoft.XMLHTTP%22)%3B%0A%20%20%7D%20catch%20(error)%20%7B%7D%0A%0A%20%20throw%20new%20Error(%22Could%20not%20create%20HTTP%20request%20object.%22)%3B%0A%7D%0Adocument.open()%3B%0Adocument.write(%22%3Chtml%3E%3Ctitle%3ELicznik%20wiadomo%C5%9Bci%3C%2Ftitle%3E%3Chead%3E%3Cstyle%3E*%7Bfont-size%3A%2020px%3Bline-height%3A%20150%25%3Bfont-family%3A%20Arial%2C%20Helvetica%2C%20sans-serif%3B%7Da%7Btext-decoration%3A%20none%3Bcolor%3A%20%23661ce6%3B%7D%3C%2Fstyle%3E%3Cscript%3E%3C%2Fscript%3E%3C%2Fhead%3E%3Cbody%3E%22)%3B%0Avar%20data%20%3D%20%22%22%3B%0Avar%20accountID%20%3D%20%22%22%3B%0Avar%20otherUserIDs%3B%0Avar%20otherUserIDsCnt%3B%0Avar%20messagesCount%3B%0Avar%20messagesCountCnt%3B%0Avar%20i%3B%0Avar%20j%3D0%3B%0Avar%20workOn%3B%0Avar%20request%20%3D%20getSource()%3B%0Arequest.open(%22GET%22%2C%20%22https%3A%2F%2Fwww.messenger.com%2F%22%2C%20true)%3B%0Arequest.send(null)%3B%0Arequest.onreadystatechange%20%3D%20function()%20%7B%0A%20%20if(request.readyState%20%3D%3D%204%20%26%26%20j%3D%3D0)%7B%0A%09%09document.write(%22Skrypt%20dzia%C5%82a%20tylko%20na%20stronie%20messenger.com!%22)%3B%0A%09%20%20%7D%0A%09%20%20j%2B%2B%3B%0A%20%20if%20(request.readyState%20%3D%3D%204)%20%7B%0Adata%20%3D%20request.responseText%3B%0AotherUserIDs%20%3D%20data.match(%2Fother_user_id%22%3A(null%7C%22%5B0-9%5D%2B)%2Fg)%3B%0AotherUserIDsCnt%20%3D%20data.match(%2Fother_user_id%22%3A(null%7C%22%5B0-9%5D%2B)%2Fg).length%3B%0AmessagesCount%20%3D%20data.match(%2Fmessages_count%22%3A%5B0-9%5D%2B%2Fg)%3B%0AmessagesCountCnt%20%3D%20data.match(%2Fmessages_count%22%3A%5B0-9%5D%2B%2Fg).length%3B%0Aif%20(messagesCountCnt%20%3D%3D%3D%20otherUserIDsCnt)%20%7B%0A%20%20var%20loopUntil%20%3D%20messagesCountCnt%3B%0A%20%20document.write(%22Kliknij%20na%20liczb%C4%99%20wiadomo%C5%9Bci%2C%20aby%20wy%C5%9Bwietli%C4%87%20profil%20u%C5%BCytkownika%22)%3B%0A%20%20document.write(%22%3Cbr%3E%3Cbr%3E%22)%3B%0A%20%20for%20(i%20%3D%200%3B%20i%20%3C%20loopUntil%3B%20i%2B%2B)%20%7B%0Aif%20(otherUserIDs%5Bi%5D%20!%3D%20null)%20%7B%0A%20%20workOn%20%3D%20(String)(otherUserIDs%5Bi%5D.match(%2F%5Cd%2B%2F))%3B%0A%20%20if(workOn%3D%3D%20%22null%22)%7B%0A%09%20%20document.write(messagesCount%5Bi%5D.match(%2F%5Cd%2B%2F)%2B%22%20%5BGrupa%5D%22)%3B%0A%20%20%7D%0A%20%20else%7B%0A%09document.write(%22%3Ca%20target%3D'_blank'%20href%3Dhttps%3A%2F%2Fwww.facebook.com%2F%22%2BworkOn%2B%22%2F%3E%22%2BmessagesCount%5Bi%5D.match(%2F%5Cd%2B%2F)%2B%22%3C%2Fa%3E%22)%3B%0A%20%20%7D%0A%7D%0Aelse%20%7B%0A%20%20document.write(%22Unknown%20group%22)%3B%0A%7D%0Adocument.write(%22%3Cbr%3E%22)%3B%0A%20%20%7D%0A%7D%0Aelse%20alert(%22Count%20of%20messages%20and%20count%20of%20other%20users%20does%20not%20match!%22)%3B%0A%20%20%7D%0A%7D%0Adocument.write(%22%3C%2Fbody%3E%3C%2Fhtml%3E%22)%3B%7D)()%3B">Licznik</a>
+</div>
+na pasek zakładek w przeglądarce. Gotowe!
+<br>
+<br>
+Aby uruchomić skrypt wystarczy jedynie kliknąć na zakładkę Licznik będac na stronie messengera
 </body>
 </html>
