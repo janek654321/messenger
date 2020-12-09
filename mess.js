@@ -11,8 +11,7 @@ return new ActiveXObject("Microsoft.XMLHTTP");
 
   throw new Error("Could not create HTTP request object.");
 }
-
-document.write("<html><title>Messenger Statistics</title><head><script></script></head><body>");
+document.write("<html><title>Licznik wiadomosci</title><head><style>*{font-size: 20px;line-height: 140%;}</style><script></script></head><body>");
 var data = "";
 var accountID = "";
 var otherUserIDs;
@@ -21,19 +20,12 @@ var messagesCount;
 var messagesCountCnt;
 var i;
 var workOn;
-
 var request = getSource();
 request.open("GET", "https://www.messenger.com/", true);
 request.send(null);
 request.onreadystatechange = function() {
   if (request.readyState == 4) {
 data = request.responseText;
-var accountIDRaw = String(data.match(/ACCOUNT_ID":"[0-9]+/));
-accountID = String(accountIDRaw.match(/\d+/));
-document.title = "Messenger Statistics";
-document.write('Your account ID is ' + accountID + '. ');
-document.write('Open this link in a new tab to verify.'.link("https://www.facebook.com/" + accountID));
-document.write('<br><br>');
 otherUserIDs = data.match(/other_user_id":(null|"[0-9]+)/g);
 otherUserIDsCnt = data.match(/other_user_id":(null|"[0-9]+)/g).length;
 messagesCount = data.match(/messages_count":[0-9]+/g);
@@ -43,13 +35,17 @@ if (messagesCountCnt === otherUserIDsCnt) {
   for (i = 0; i < loopUntil; i++) {
 if (otherUserIDs[i] != null) {
   workOn = (String)(otherUserIDs[i].match(/\d+/));
-  document.write(workOn.link("https://www.facebook.com/" + workOn));
+  document.write((i+1)+".  ");
+  if(workOn== "null"){
+	  document.write(messagesCount[i].match(/\d+/)+" [Grupa]");
+  }
+  else{
+	document.write("<a style='color: black' target='_blank' href=https://www.facebook.com/"+ workOn + ">"+messagesCount[i].match(/\d+/)+"</a>");
+  }
 }
 else {
   document.write("Unknown group");
 }
-document.write(" - ");
-document.write(messagesCount[i].match(/\d+/));
 document.write("<br>");
   }
 }
