@@ -1,4 +1,4 @@
-function getSource() {
+javascript: function getSource() {
   try {
 return new XMLHttpRequest();
   } catch (error) {}
